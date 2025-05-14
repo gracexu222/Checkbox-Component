@@ -1,30 +1,76 @@
-/* Put any custom CSS styles here.  */
-/* Be sure to delete the <style> tag in index.html if you want to use this stylesheet. */
-body {
-  margin: 0;
-  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+/* ----- layout helpers ----- */
+.checkbox-demo {
+  min-height: 100vh; /* centres everything vertically */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px; /* vertical spacing between rows */
 }
 
-* {
-  box-sizing: border-box;
+/* ----- row styling ----- */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  line-height: 1;
+  color: #3f3f46; /* neutral-dark label text */
+  user-select: none;
+  cursor: pointer;
 }
 
-.credits {
-  color: #777;
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  font-size: 11px;
-  text-align: center;
+/* ----- base checkbox reset ----- */
+.checkbox-row input[type="checkbox"] {
+  appearance: none; /* remove native look */
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px; /* gap between box and label */
+  border: 2px solid #d4d4d8; /* neutral-light border */
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.credits a {
-  color: #000;
-  font-weight: bold;
+/* focus ring for keyboard users */
+.checkbox-row input[type="checkbox"]:focus-visible {
+  outline: 2px solid #6366f1; /* same brand colour as checked bg */
+  outline-offset: 2px;
+}
+
+/* ----- checked state ----- */
+.checkbox-row input[type="checkbox"]:checked {
+  background-color: #6366f1; /* brand colour */
+  border-color: #6366f1;
+}
+
+/* custom tick */
+.checkbox-row input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: translate(-50%, -60%) rotate(-45deg); /* places and rotates the tick */
+}
+
+/* ----- indeterminate state ----- */
+.checkbox-row input[type="checkbox"]:indeterminate {
+  background-color: #6366f1;
+  border-color: #6366f1;
+}
+
+.checkbox-row input[type="checkbox"]:indeterminate::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 2px;
+  background: #fff; /* horizontal bar */
+  transform: translate(-50%, -50%);
 }
